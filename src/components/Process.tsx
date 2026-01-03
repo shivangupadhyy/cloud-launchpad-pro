@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { 
   MessageSquare, 
   FileCode, 
@@ -5,6 +6,7 @@ import {
   FileText, 
   Headphones 
 } from "lucide-react";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const steps = [
   {
@@ -44,7 +46,7 @@ export const Process = () => {
     <section id="process" className="py-24 lg:py-32 relative bg-secondary/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <ScrollReveal className="max-w-3xl mx-auto text-center mb-16">
           <span className="text-primary text-sm font-semibold tracking-wider uppercase mb-4 block">
             Process
           </span>
@@ -55,7 +57,7 @@ export const Process = () => {
             A proven process designed for clarity, efficiency, and results. 
             From first call to production deployment in weeks, not months.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Steps */}
         <div className="max-w-4xl mx-auto">
@@ -66,35 +68,44 @@ export const Process = () => {
             {/* Step Items */}
             <div className="space-y-12">
               {steps.map((step, index) => (
-                <div
+                <ScrollReveal
                   key={step.number}
-                  className={`relative flex items-start gap-6 lg:gap-12 ${
-                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                  }`}
+                  delay={index * 0.1}
+                  direction={index % 2 === 0 ? "left" : "right"}
                 >
-                  {/* Content */}
-                  <div className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
-                    <div className={`pl-16 lg:pl-0 ${index % 2 === 0 ? "lg:pr-12" : "lg:pl-12"}`}>
-                      <span className="text-primary text-sm font-semibold mb-2 block">
-                        Step {step.number}
-                      </span>
-                      <h3 className="text-xl font-semibold mb-2 text-foreground">
-                        {step.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {step.description}
-                      </p>
+                  <div
+                    className={`relative flex items-start gap-6 lg:gap-12 ${
+                      index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                    }`}
+                  >
+                    {/* Content */}
+                    <div className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
+                      <div className={`pl-16 lg:pl-0 ${index % 2 === 0 ? "lg:pr-12" : "lg:pl-12"}`}>
+                        <span className="text-primary text-sm font-semibold mb-2 block">
+                          Step {step.number}
+                        </span>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">
+                          {step.title}
+                        </h3>
+                        <p className="text-muted-foreground">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Icon Circle */}
-                  <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-lg">
-                    <step.icon className="w-5 h-5 text-primary" />
-                  </div>
+                    {/* Icon Circle */}
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-lg"
+                    >
+                      <step.icon className="w-5 h-5 text-primary" />
+                    </motion.div>
 
-                  {/* Empty space for alternating layout */}
-                  <div className="hidden lg:block flex-1" />
-                </div>
+                    {/* Empty space for alternating layout */}
+                    <div className="hidden lg:block flex-1" />
+                  </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>

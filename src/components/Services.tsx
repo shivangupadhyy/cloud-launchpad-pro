@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { 
   GitBranch, 
   Cloud, 
@@ -8,6 +9,7 @@ import {
   Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 
 const services = [
   {
@@ -82,7 +84,7 @@ export const Services = () => {
     <section id="services" className="py-24 lg:py-32 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <ScrollReveal className="max-w-3xl mx-auto text-center mb-16">
           <span className="text-primary text-sm font-semibold tracking-wider uppercase mb-4 block">
             Services
           </span>
@@ -93,69 +95,70 @@ export const Services = () => {
             From initial setup to ongoing support, I provide the infrastructure 
             expertise your startup needs to scale with confidence.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((service, index) => (
-            <div
-              key={service.title}
-              className="group relative p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 shadow-card hover:shadow-lg"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <service.icon className="w-6 h-6 text-primary" />
-              </div>
+        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8" staggerDelay={0.1}>
+          {services.map((service) => (
+            <StaggerItem key={service.title}>
+              <motion.div
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group relative h-full p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors duration-300 shadow-card"
+              >
+                {/* Icon */}
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-6 h-6 text-primary" />
+                </div>
 
-              {/* Content */}
-              <h3 className="text-xl font-semibold mb-3 text-foreground">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground mb-4 text-sm">
-                {service.description}
-              </p>
-
-              {/* Problem */}
-              <div className="p-3 rounded-lg bg-secondary/50 mb-4">
-                <p className="text-sm text-muted-foreground italic">
-                  "{service.problem}"
+                {/* Content */}
+                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  {service.description}
                 </p>
-              </div>
 
-              {/* What's Included */}
-              <div className="mb-4">
-                <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
-                  What's Included
-                </p>
-                <ul className="space-y-2">
-                  {service.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                {/* Problem */}
+                <div className="p-3 rounded-lg bg-secondary/50 mb-4">
+                  <p className="text-sm text-muted-foreground italic">
+                    "{service.problem}"
+                  </p>
+                </div>
 
-              {/* Ideal For */}
-              <div className="pt-4 border-t border-border">
-                <p className="text-xs text-muted-foreground">
-                  <span className="font-semibold text-foreground">Ideal for:</span>{" "}
-                  {service.idealFor}
-                </p>
-              </div>
+                {/* What's Included */}
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
+                    What's Included
+                  </p>
+                  <ul className="space-y-2">
+                    {service.includes.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              {/* CTA */}
-              <Button variant="ghost" className="mt-4 w-full justify-between group-hover:text-primary" asChild>
-                <a href="#contact">
-                  Get a Quote
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
-              </Button>
-            </div>
+                {/* Ideal For */}
+                <div className="pt-4 border-t border-border">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-semibold text-foreground">Ideal for:</span>{" "}
+                    {service.idealFor}
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <Button variant="ghost" className="mt-4 w-full justify-between group-hover:text-primary" asChild>
+                  <a href="#contact">
+                    Get a Quote
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </Button>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
